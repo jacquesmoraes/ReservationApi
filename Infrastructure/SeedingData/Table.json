@@ -1,0 +1,15 @@
+[
+  {
+
+    "TableName": "bacon-burger",
+    "IsBooked": true
+
+  },
+
+  {
+    "TableName": "cheeseburger",
+    "IsBooked": false
+
+  }
+
+]
