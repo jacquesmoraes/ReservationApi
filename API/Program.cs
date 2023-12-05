@@ -1,3 +1,4 @@
+using Core.Interfaces;
 using Infrastructure;
 using Infrastructure.Service;
 using Microsoft.AspNetCore.Identity;
@@ -11,6 +12,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 builder.Services.AddDbContext<ReservationDbContext>(options =>
 {
     options.UseSqlite(builder.Configuration.GetConnectionString("defaultConnection") ?? throw new Exception("error when conecting with database"));

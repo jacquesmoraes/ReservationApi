@@ -2,17 +2,20 @@
 
   {
     "GuestName": "bob",
-    "ReservationDate": "03/20/2024",
-    "NumberOfPeople": "2",
-    "TableId": "1"
+    "NumberOfPeople": 2,
+    "ReservationDate": "2024-03-02",
+    "TableId": 2
+   
+
 
   },
 
   {
     "GuestName": "bacon-burger",
-    "ReservationDate": "02/18/2024",
-    "NumberOfPeople": "2",
-    "TableId": "2"
+    "NumberOfPeople": 2,
+    "ReservationDate": "2024-05-20",
+    "TableId": 1
+
   }
 
 ]

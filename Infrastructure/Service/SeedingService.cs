@@ -14,7 +14,7 @@ namespace Infrastructure.Service
         {
             if (!context.Tables.Any())
             {
-                var tablesData = File.ReadAllText("../Infrasctructure/SeedingData/Table.json");
+                var tablesData = File.ReadAllText("../Infrastructure/SeedingData/Table.json");
                 var table = JsonSerializer.Deserialize<List<Table>>(tablesData);
                 context.Tables.AddRange(table);
             }

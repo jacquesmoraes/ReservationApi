@@ -1,13 +1,21 @@
 [
   {
-
+    "Id": 1,
     "TableName": "bacon-burger",
     "IsBooked": true
 
   },
 
   {
+    "Id": 2,
     "TableName": "cheeseburger",
+    "IsBooked": false
+
+  },
+
+  {
+    "Id": 3,
+    "TableName": "prime",
     "IsBooked": false
 
   }

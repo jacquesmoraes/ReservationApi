@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Core.Interfaces;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,38 +9,31 @@ namespace API.Controllers
     [ApiController]
     public class ReservationController : ControllerBase
     {
-        private readonly ReservationDbContext _context;
+        
+        private readonly IReservationRepository _reservationRepository;
 
-        public ReservationController(ReservationDbContext context)
+        public ReservationController(IReservationRepository reservationRepository)
         {
-            _context = context;
+            _reservationRepository = reservationRepository;
         }
 
         [HttpGet]
         public IActionResult getTables()
         {
-            var tables =  _context.Reservations.ToList();
+            var tables =  _reservationRepository.GetTables();
             return Ok(tables);
         }
         
         [HttpPost]
 
-        public IActionResult ReserveTable([FromBody] Reservation reservation)
+        public async Task<IActionResult> ReserveTable(Reservation reservation)
         {
-            if (reservation == null)
+           
+            if (await _reservationRepository.Reservation(reservation))
             {
-                return BadRequest("Invalid reservation data");
+                return Ok("table reservation succed");
             }
-            var reservationTable = _context.Tables.SingleOrDefault(x => x.Id == reservation.Id && !x.IsBooked);
-            if (reservationTable != null)
-            {
-                reservationTable.IsBooked = true;
-                _context.Add(reservationTable);
-                _context.SaveChanges();
-                return Ok("reservation sucessfull");
-
-            }
-            return BadRequest("sorry, table is already taken");
+            return BadRequest("sorry table is not available");
         }
     }
 }
