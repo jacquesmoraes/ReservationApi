@@ -1,16 +1,17 @@
 ﻿using Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Interfaces
 {
     public interface IReservationRepository
     {
-        IEnumerable<Table> GetTables();
+       
+           Task<IEnumerable<Reservation>> GetAllReservations();
+            Task<IEnumerable<Reservation>> GetReservationById(int id);
+        Task<IEnumerable<Reservation>> GetReservationByTableId(int tableId);
+           Task<Reservation> CreateReservation(Reservation reservation);
 
-        Task<bool> Reservation(Reservation reservation);
+            Task<Reservation> GetReservationByDateAndTime(int id,  DateTime date, TimeSpan time);
+
+
     }
 }

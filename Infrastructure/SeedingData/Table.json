@@ -1,23 +1,43 @@
 [
   {
     "Id": 1,
-    "TableName": "bacon-burger",
-    "IsBooked": true
-
+    "TableName": "prime-deck",
+    "Capacity": 5
   },
 
   {
     "Id": 2,
-    "TableName": "cheeseburger",
-    "IsBooked": false
+    "TableName": "saloon",
+    "Capacity": 7
 
   },
 
   {
     "Id": 3,
-    "TableName": "prime",
-    "IsBooked": false
+    "TableName": "garden-table",
+    "Capacity": 8
+
+  },
+  {
+    "Id": 4,
+    "TableName": "purple-room",
+    "Capacity": 15
+
+  },
+
+  {
+    "Id": 5,
+    "TableName": "art-gallery",
+    "Capacity": 10
+
+  },
+
+  {
+    "Id": 6,
+    "TableName": "outer-space-room",
+    "Capacity": 20
 
   }
+
 
 ]

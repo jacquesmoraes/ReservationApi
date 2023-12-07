@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public class Table : BaseEntity
+    public class ReservationDto
     {
-        
         public string TableName { get; set; }
-
         public int Capacity { get; set; }
 
-        public List<Reservation> reservations { get; set; } = new();
-
+        public int TableId { get; set; }
     }
 }

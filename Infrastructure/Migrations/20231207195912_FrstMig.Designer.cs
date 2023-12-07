@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ReservationDbContext))]
-    [Migration("20231204032220_Initial-Migration")]
-    partial class InitialMigration
+    [Migration("20231207195912_FrstMig")]
+    partial class FrstMig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,9 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("ReservationDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<TimeSpan>("ReservationTime")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("TableId")
                         .HasColumnType("INTEGER");
 
@@ -51,7 +54,7 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("IsBooked")
+                    b.Property<int>("Capacity")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("TableName")

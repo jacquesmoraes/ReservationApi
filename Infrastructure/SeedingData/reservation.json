@@ -4,16 +4,46 @@
     "GuestName": "bob",
     "NumberOfPeople": 2,
     "ReservationDate": "2024-03-02",
+    "ReservationTime": "18:45:00",
     "TableId": 2
-   
+
+
+
+  },
+  {
+    "GuestName": "paul",
+    "NumberOfPeople": 2,
+    "ReservationDate": "2024-03-02",
+    "ReservationTime": "10:30:00",
+    "TableId": 2
+
 
 
   },
 
   {
-    "GuestName": "bacon-burger",
+    "GuestName": "billy",
     "NumberOfPeople": 2,
     "ReservationDate": "2024-05-20",
+    "ReservationTime": "13:45:00",
+    "TableId": 1
+
+  },
+
+  {
+    "GuestName": "emeline",
+    "NumberOfPeople": 2,
+    "ReservationDate": "2024-05-20",
+    "ReservationTime": "10:45:00",
+    "TableId": 1
+
+  },
+
+  {
+    "GuestName": "john",
+    "NumberOfPeople": 2,
+    "ReservationDate": "2024-05-20",
+    "ReservationTime": "11:45:00",
     "TableId": 1
 
   }

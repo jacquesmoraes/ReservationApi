@@ -5,9 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ReservationController : ControllerBase
+   
+    public class ReservationController : BaseApiController
     {
         
         private readonly IReservationRepository _reservationRepository;
@@ -18,22 +17,38 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public IActionResult getTables()
+        public async Task<IActionResult> Reservations()
         {
-            var tables =  _reservationRepository.GetTables();
-            return Ok(tables);
+            var reservations = await _reservationRepository.GetAllReservations();
+            return Ok(reservations);
         }
-        
-        [HttpPost]
 
-        public async Task<IActionResult> ReserveTable(Reservation reservation)
+        [HttpGet("available")]
+        public async Task<IEnumerable<Reservation>> GetReservationsByTable(int id)
         {
-           
-            if (await _reservationRepository.Reservation(reservation))
-            {
-                return Ok("table reservation succed");
-            }
-            return BadRequest("sorry table is not available");
+            return await _reservationRepository.GetReservationByTableId(id);
         }
+
+        //[HttpPost]
+        //public ActionResult<Reservation> CreateReservation([FromBody] Reservation reservation)
+        //{
+        //    if (reservation == null)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    var createdReservation = _reservationRepository.CreateReservation(reservation);
+
+        //    return CreatedAtAction(nameof(GetReservationById), new { id = createdReservation.Id }, createdReservation);
+        //}
+
+        [HttpGet("{id}/tableAvailability")]
+        public async Task<Reservation> GetTableAvailable(int id,DateTime date, TimeSpan time)
+        {
+            return await _reservationRepository.GetReservationByDateAndTime(id, date, time);
+        }
+
+
+
     }
 }

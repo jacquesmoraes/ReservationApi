@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class FrstMig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +18,7 @@ namespace Infrastructure.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     TableName = table.Column<string>(type: "TEXT", nullable: true),
-                    IsBooked = table.Column<bool>(type: "INTEGER", nullable: false)
+                    Capacity = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -33,6 +33,7 @@ namespace Infrastructure.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     GuestName = table.Column<string>(type: "TEXT", nullable: true),
                     ReservationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ReservationTime = table.Column<TimeSpan>(type: "TEXT", nullable: false),
                     NumberOfPeople = table.Column<int>(type: "INTEGER", nullable: false),
                     TableId = table.Column<int>(type: "INTEGER", nullable: false)
                 },

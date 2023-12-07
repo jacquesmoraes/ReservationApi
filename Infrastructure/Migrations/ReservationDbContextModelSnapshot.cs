@@ -32,6 +32,9 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("ReservationDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<TimeSpan>("ReservationTime")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("TableId")
                         .HasColumnType("INTEGER");
 
@@ -39,7 +42,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("TableId");
 
-                    b.ToTable("Reservations");
+                    b.ToTable("Reservations", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Table", b =>
@@ -48,7 +51,7 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("IsBooked")
+                    b.Property<int>("Capacity")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("TableName")
@@ -56,7 +59,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tables");
+                    b.ToTable("Tables", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Reservation", b =>
