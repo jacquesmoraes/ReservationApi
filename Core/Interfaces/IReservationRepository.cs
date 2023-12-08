@@ -6,11 +6,11 @@ namespace Core.Interfaces
     {
        
            Task<IEnumerable<Reservation>> GetAllReservations();
-            Task<IEnumerable<Reservation>> GetReservationById(int id);
-        Task<IEnumerable<Reservation>> GetReservationByTableId(int tableId);
+            Task<Reservation> GetReservationById(int id);
+       
            Task<Reservation> CreateReservation(Reservation reservation);
 
-            Task<Reservation> GetReservationByDateAndTime(int id,  DateTime date, TimeSpan time);
+            Task<IEnumerable<Reservation>> GetReservationByTableId(int id,  DateTime date, TimeSpan? time);
 
 
     }

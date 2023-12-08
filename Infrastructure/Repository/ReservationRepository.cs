@@ -23,32 +23,30 @@ namespace Infrastructure.Repository
            return  await _context.Reservations.ToListAsync();
         }
         
-        public async Task<Reservation> GetReservationByDateAndTime(int tableId, DateTime date, TimeSpan time)
+       
+
+        public async Task<Reservation> GetReservationById(int id)
+        {
+            var reservation = await _context.Reservations.FirstOrDefaultAsync(r => r.Id == id);
+            return reservation;
+        }
+
+        public async Task<IEnumerable<Reservation>> GetReservationByTableId(int id, DateTime date, TimeSpan? time)
         {
             var duration = new TimeSpan(5, 0, 0);
-            var endTime = time.Add(duration);
-            return await _context.Reservations.FirstOrDefaultAsync(r =>
-            r.TableId == tableId &&
-             r.ReservationDate.Date == date.Date &&
-             r.ReservationTime >= time );
-            
-           
-        }
-
-        public Task<IEnumerable<Reservation>> GetReservationById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<Reservation>> GetReservationByTableId(int id)
-        {
-            var reservations =  _context.Reservations.Where(x => x.TableId == id);
-           
-            foreach(var reservation in reservations)
+         
+            var reservations = await _context.Reservations.Where(x => x.TableId == id &&
+           x.ReservationDate == date).ToListAsync();
+            if (time.HasValue)
             {
-                return reservations;
+                var result = reservations.Where(x => x.ReservationTime <= time &&
+           x.ReservationTime.Add(duration) >= time).ToList();
+                return result;
             }
-            return reservations;
+            else
+            {
+                return reservations.ToList();
+            }
         }
 
        

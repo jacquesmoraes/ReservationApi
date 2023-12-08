@@ -13,7 +13,7 @@ namespace Core.Entities
 
         public int Capacity { get; set; }
 
-        public List<Reservation> reservations { get; set; } = new();
+       
 
     }
 }

@@ -23,30 +23,33 @@ namespace API.Controllers
             return Ok(reservations);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Reservation>> GetReservationsById(int id)
+        {
+            return await _reservationRepository.GetReservationById(id);
+        }
+
         [HttpGet("available")]
-        public async Task<IEnumerable<Reservation>> GetReservationsByTable(int id)
+        public async Task<IEnumerable<Reservation>> GetReservationsByTable( int id,  DateTime date, TimeSpan? time)
         {
-            return await _reservationRepository.GetReservationByTableId(id);
+            return await _reservationRepository.GetReservationByTableId(id, date, time);
         }
 
-        //[HttpPost]
-        //public ActionResult<Reservation> CreateReservation([FromBody] Reservation reservation)
-        //{
-        //    if (reservation == null)
-        //    {
-        //        return BadRequest();
-        //    }
 
-        //    var createdReservation = _reservationRepository.CreateReservation(reservation);
 
-        //    return CreatedAtAction(nameof(GetReservationById), new { id = createdReservation.Id }, createdReservation);
-        //}
-
-        [HttpGet("{id}/tableAvailability")]
-        public async Task<Reservation> GetTableAvailable(int id,DateTime date, TimeSpan time)
+        [HttpPost]
+        public ActionResult<Reservation> CreateReservation(Reservation reservation)
         {
-            return await _reservationRepository.GetReservationByDateAndTime(id, date, time);
+            if (reservation == null)
+            {
+                return BadRequest();
+            }
+
+            var createdReservation = _reservationRepository.CreateReservation(reservation);
+
+            return CreatedAtAction(nameof(GetReservationById), new { id = createdReservation.Id }, createdReservation);
         }
+
 
 
 
