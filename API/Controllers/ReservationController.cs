@@ -38,20 +38,22 @@ namespace API.Controllers
 
 
         [HttpPost]
-        public ActionResult<Reservation> CreateReservation(Reservation reservation)
+        public async Task<ActionResult<Reservation>> CreateReservation(Reservation reservation)
         {
-            if (reservation == null)
-            {
-                return BadRequest();
+           
+                bool isTableAvaiable = await _reservationRepository.IsTableAvailable(reservation.TableId,reservation.GuestName, reservation.ReservationDate, reservation.ReservationTime);
+                if (!isTableAvaiable) 
+                {
+                    return BadRequest("sorry, table is not avaiable");
+                }
+               var createReservation = await _reservationRepository.CreateReservation(reservation);
+                return CreatedAtAction(nameof(GetReservationsById),new {id = createReservation.Id }, createReservation);
             }
-
-            var createdReservation = _reservationRepository.CreateReservation(reservation);
-
-            return CreatedAtAction(nameof(GetReservationById), new { id = createdReservation.Id }, createdReservation);
+           
         }
 
 
 
 
     }
-}
+

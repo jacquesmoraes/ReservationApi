@@ -13,7 +13,5 @@ namespace Core.Entities
 
         public int Capacity { get; set; }
 
-       
-
     }
 }

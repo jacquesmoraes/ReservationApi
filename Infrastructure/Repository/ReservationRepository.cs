@@ -13,10 +13,7 @@ namespace Infrastructure.Repository
             _context = context;
         }
 
-        public Task<Reservation> CreateReservation(Reservation reservation)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public async Task<IEnumerable<Reservation>> GetAllReservations()
         {
@@ -33,15 +30,12 @@ namespace Infrastructure.Repository
 
         public async Task<IEnumerable<Reservation>> GetReservationByTableId(int id, DateTime date, TimeSpan? time)
         {
-            var duration = new TimeSpan(5, 0, 0);
-         
+               
             var reservations = await _context.Reservations.Where(x => x.TableId == id &&
            x.ReservationDate == date).ToListAsync();
             if (time.HasValue)
             {
-                var result = reservations.Where(x => x.ReservationTime <= time &&
-           x.ReservationTime.Add(duration) >= time).ToList();
-                return result;
+                return FilterByTime(reservations, time.Value);
             }
             else
             {
@@ -49,9 +43,34 @@ namespace Infrastructure.Repository
             }
         }
 
-       
+        public async Task<bool> IsTableAvailable(int id,string name, DateTime date, TimeSpan time)
+        {
+            
+            var isTaleAvailable = await _context.Reservations.Where(x => x.TableId == id &&
+            x.ReservationDate == date.Date)
+                .FirstOrDefaultAsync(x => 
+                x.ReservationTime <= time && time < x.ReservationTime.Add(TimeSpan.FromHours(5)) ||
+            time >= x.ReservationTime.Subtract(TimeSpan.FromHours(5)) && time < x.ReservationTime);
 
-        
+            return isTaleAvailable == null;
+        }
+
+        public async Task<Reservation> CreateReservation(Reservation reservation)
+        {
+            _context.Reservations.Add(reservation);
+            await _context.SaveChangesAsync();
+            return reservation;
+        }
+
+        private IEnumerable<Reservation> FilterByTime(IEnumerable<Reservation> reservations, TimeSpan time)
+        {
+            
+                return reservations.AsEnumerable().Where(x =>
+                    x.ReservationTime <= time && time < x.ReservationTime.Add(TimeSpan.FromHours(5)) ||
+                time >= x.ReservationTime.Subtract(TimeSpan.FromHours(5)) && time < x.ReservationTime).AsQueryable();
+            
+            
+        }
     }
 
 }
