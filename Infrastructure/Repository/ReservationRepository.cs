@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
 using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace Infrastructure.Repository
 {
@@ -76,6 +77,39 @@ namespace Infrastructure.Repository
                 time >= x.ReservationTime.Subtract(TimeSpan.FromHours(5)) && time < x.ReservationTime).AsQueryable();
             
             
+        }
+
+        public async Task<Reservation> UpdateReservationAsync(Reservation reservation)
+        {
+            bool hasAny = await _context.Reservations.AnyAsync(x => x.Id== reservation.Id);
+
+            if (!hasAny) 
+            {
+                throw new Exception("Id not found"); 
+            
+            }
+            var existingReservation = await _context.Reservations.FindAsync(reservation.Id);
+            try
+            {
+                existingReservation.GuestName = reservation.GuestName;
+                existingReservation.ReservationDate = reservation.ReservationDate;
+                existingReservation.ReservationTime = reservation.ReservationTime;
+                existingReservation.NumberOfPeople= reservation.NumberOfPeople;
+                _context.Update(existingReservation);
+                await _context.SaveChangesAsync();
+                return existingReservation;
+            }
+            catch (DBConcurrencyException ex)
+            {
+                throw new DBConcurrencyException(ex.Message, ex);
+            }
+          
+
+        }
+
+        public Task DeleteReservation(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 

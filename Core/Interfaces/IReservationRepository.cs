@@ -11,7 +11,9 @@ namespace Core.Interfaces
            Task<Reservation> CreateReservation(Reservation reservation);
 
             Task<IEnumerable<Reservation>> GetReservationByTableId(int id,  DateTime date, TimeSpan? time);
+            Task<Reservation>  UpdateReservationAsync(Reservation reservation);
 
+            Task DeleteReservation(int id);
 
     }
 }

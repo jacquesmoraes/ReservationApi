@@ -12,11 +12,14 @@ namespace API.Controllers
         
         private readonly IReservationRepository _reservationRepository;
         private readonly IMapper _mapper;
+        private readonly ReservationDbContext _context;
 
-        public ReservationController(IReservationRepository reservationRepository, IMapper mapper)
+        public ReservationController(IReservationRepository reservationRepository, IMapper mapper,
+            ReservationDbContext context)
         {
             _reservationRepository = reservationRepository;
             _mapper = mapper;
+            _context = context;
         }
 
         [HttpGet]
@@ -42,9 +45,15 @@ namespace API.Controllers
             return  await _reservationRepository.GetReservationByTableId(id, date, time);
         }
 
-
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateReservation( Reservation reservation)
+        {
+               return Ok (await _reservationRepository.UpdateReservationAsync(reservation));
+               
+        }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult<Reservation>> CreateReservation(Reservation reservation)
         {
            
