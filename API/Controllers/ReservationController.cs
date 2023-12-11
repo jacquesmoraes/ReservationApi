@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using AutoMapper;
+using Core.Entities;
 using Core.Interfaces;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
@@ -10,29 +11,35 @@ namespace API.Controllers
     {
         
         private readonly IReservationRepository _reservationRepository;
+        private readonly IMapper _mapper;
 
-        public ReservationController(IReservationRepository reservationRepository)
+        public ReservationController(IReservationRepository reservationRepository, IMapper mapper)
         {
             _reservationRepository = reservationRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Reservations()
+        public async Task<ActionResult<ReservationDto>> Reservations()
         {
             var reservations = await _reservationRepository.GetAllReservations();
-            return Ok(reservations);
+            var data = _mapper.Map<IEnumerable<Reservation>, IEnumerable<ReservationDto>>(reservations);
+            return Ok( data);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Reservation>> GetReservationsById(int id)
+        public async Task<ActionResult<ReservationDto>> GetReservationsById(int id)
         {
-            return await _reservationRepository.GetReservationById(id);
+            var reservation = await  _reservationRepository.GetReservationById(id);
+            return _mapper.Map<Reservation, ReservationDto>(reservation);
+
+            
         }
 
         [HttpGet("available")]
         public async Task<IEnumerable<Reservation>> GetReservationsByTable( int id,  DateTime date, TimeSpan? time)
         {
-            return await _reservationRepository.GetReservationByTableId(id, date, time);
+            return  await _reservationRepository.GetReservationByTableId(id, date, time);
         }
 
 
@@ -51,9 +58,6 @@ namespace API.Controllers
             }
            
         }
-
-
-
 
     }
 

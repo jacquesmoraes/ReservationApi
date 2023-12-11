@@ -17,14 +17,15 @@ namespace Infrastructure.Repository
 
         public async Task<IEnumerable<Reservation>> GetAllReservations()
         {
-           return  await _context.Reservations.ToListAsync();
+           return  await _context.Reservations.Include(x => x.Table).
+                OrderBy(x => x.ReservationDate).ThenBy(x => x.ReservationTime).ToListAsync();
         }
         
        
 
         public async Task<Reservation> GetReservationById(int id)
         {
-            var reservation = await _context.Reservations.FirstOrDefaultAsync(r => r.Id == id);
+            var reservation = await _context.Reservations.Include(x => x.Table).FirstOrDefaultAsync(r => r.Id == id);
             return reservation;
         }
 
@@ -43,26 +44,31 @@ namespace Infrastructure.Repository
             }
         }
 
-        public async Task<bool> IsTableAvailable(int id,string name, DateTime date, TimeSpan time)
+        public async Task<bool> IsTableAvailable(int id, string name, DateTime date, TimeSpan time)
         {
-            
-            var isTaleAvailable = await _context.Reservations.Where(x => x.TableId == id &&
-            x.ReservationDate == date.Date)
-                .FirstOrDefaultAsync(x => 
-                x.ReservationTime <= time && time < x.ReservationTime.Add(TimeSpan.FromHours(5)) ||
-            time >= x.ReservationTime.Subtract(TimeSpan.FromHours(5)) && time < x.ReservationTime);
+            var fiveHours = TimeSpan.FromHours(5);
 
-            return isTaleAvailable == null;
+            var reservations = await _context.Reservations
+                .Where(x => x.TableId == id && x.ReservationDate == date.Date)
+                .ToListAsync();
+
+            var isTableAvailable = reservations
+                .FirstOrDefault(x =>
+                    x.ReservationTime <= time && time < x.ReservationTime.Add(fiveHours) ||
+                    time >= x.ReservationTime.Subtract(fiveHours) && time < x.ReservationTime);
+
+            return isTableAvailable == null;
         }
 
         public async Task<Reservation> CreateReservation(Reservation reservation)
         {
+            
             _context.Reservations.Add(reservation);
             await _context.SaveChangesAsync();
             return reservation;
         }
 
-        private IEnumerable<Reservation> FilterByTime(IEnumerable<Reservation> reservations, TimeSpan time)
+        private static IEnumerable<Reservation> FilterByTime(IEnumerable<Reservation> reservations, TimeSpan time)
         {
             
                 return reservations.AsEnumerable().Where(x =>

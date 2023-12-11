@@ -31,12 +31,8 @@ namespace API.Controllers
 
 
 
-        //[HttpGet("availability")]
-        //public async Task<ActionResult<bool>> GetTableAvailability([FromQuery] DateTime date, [FromQuery] TimeSpan time)
-        //{
-        //    var isAvailable = await _tableRepo.GetAvailableTablesAsync(date, time);
-        //    return Ok(isAvailable);
-        //}
+        
+       
     }
 }
 
