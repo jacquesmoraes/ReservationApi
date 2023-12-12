@@ -13,7 +13,7 @@ namespace Core.Interfaces
             Task<IEnumerable<Reservation>> GetReservationByTableId(int id,  DateTime date, TimeSpan? time);
             Task<Reservation>  UpdateReservationAsync(Reservation reservation);
 
-            Task DeleteReservation(int id);
+            Task<Reservation> DeleteReservationAsync(Reservation reservation);
 
     }
 }

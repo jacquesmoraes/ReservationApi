@@ -89,12 +89,14 @@ namespace Infrastructure.Repository
             
             }
             var existingReservation = await _context.Reservations.FindAsync(reservation.Id);
+            
             try
             {
                 existingReservation.GuestName = reservation.GuestName;
                 existingReservation.ReservationDate = reservation.ReservationDate;
                 existingReservation.ReservationTime = reservation.ReservationTime;
                 existingReservation.NumberOfPeople= reservation.NumberOfPeople;
+                existingReservation.TableId= reservation.TableId;
                 _context.Update(existingReservation);
                 await _context.SaveChangesAsync();
                 return existingReservation;
@@ -107,9 +109,23 @@ namespace Infrastructure.Repository
 
         }
 
-        public Task DeleteReservation(int id)
+        public async Task<Reservation> DeleteReservationAsync(Reservation reservation)
         {
-            throw new NotImplementedException();
+            var existingReservation = await _context.Reservations.FindAsync(reservation.Id);
+            if (existingReservation == null || existingReservation.Id == 0)
+            {
+                throw new Exception("id not provided");
+            }
+            try
+            {
+                 _context.Reservations.Remove(existingReservation);
+                await _context.SaveChangesAsync();
+                return reservation;
+            }
+            catch(DBConcurrencyException ex)
+            {
+                throw new DBConcurrencyException($"{ex.Message}", ex);
+            }
         }
     }
 
