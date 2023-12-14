@@ -6,18 +6,23 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule} from "@angular/common/http";
 import { ReservationComponent } from './reservation/reservation.component';
+import { TablesComponent } from './tables/tables.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
    
-    ReservationComponent
+    ReservationComponent,
+        TablesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
