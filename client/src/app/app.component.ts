@@ -1,7 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Reservation } from './models/reservation';
-import { Table } from './models/tables';
 
 @Component({
   selector: 'app-root',
