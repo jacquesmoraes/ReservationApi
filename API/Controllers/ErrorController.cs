@@ -1,4 +1,4 @@
-﻿using API.Exception;
+﻿using API.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 

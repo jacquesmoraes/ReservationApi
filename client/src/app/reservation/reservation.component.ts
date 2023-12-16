@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./reservation.component.scss']
 })
 export class ReservationComponent {
+ minDate = new Date();
 
+ 
 }

@@ -1,6 +1,7 @@
 ﻿using System.Runtime.Versioning;
 
-namespace API.Exception
+namespace API.Errors
+
 {
     public class ApiResponse
     {

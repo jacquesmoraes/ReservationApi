@@ -1,4 +1,4 @@
-﻿namespace API.Exception
+﻿namespace API.Errors
 {
     public class ApiValidationExceptionResponse : ApiResponse
     {
