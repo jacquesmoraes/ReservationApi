@@ -8,10 +8,12 @@ namespace Core.Interfaces
         Task<IEnumerable<Table>> GetTablesAsync();
 
         Task<Table> GetTableByIdAsync(int id);
+        Task<IEnumerable<Table>> GetAvailableTables(int numberOfGuests, DateTime date, TimeSpan time);
 
 
 
-       
+
+
 
     }
 }

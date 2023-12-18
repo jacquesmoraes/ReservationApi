@@ -25,9 +25,27 @@ namespace Infrastructure.Repository
             return await _context.Tables.FirstOrDefaultAsync(t => t.Id == id);
         }
 
-      
+        public async Task<IEnumerable<Table>> GetAvailableTables(int numberOfGuests, DateTime date, TimeSpan time)
+        {
 
-        
+            var reservations = await _context.Reservations.Where(x => x.Table.Capacity >= numberOfGuests &&
+           x.ReservationDate == date &&
+           x.ReservationTime <= time && (x.ReservationTime + TimeSpan.FromHours(5)) > time ||
+            time.Subtract(TimeSpan.FromHours(5)) <= x.ReservationTime && x.ReservationTime < time.Add(TimeSpan.FromHours(5))).ToListAsync();
+            if (!reservations.Any())
+            {
+                return await _context.Tables.ToListAsync();
+            }
+            var reservedTableIds = reservations.Select(r => r.TableId);
+            var availableTables = await _context.Tables
+                .Where(t => !reservedTableIds.Contains(t.Id) && t.Capacity >= numberOfGuests)
+                .ToListAsync();
+
+            return availableTables;
+
+
+
+        }
 
         
     }

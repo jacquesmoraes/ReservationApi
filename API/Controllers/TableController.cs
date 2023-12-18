@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Core.Interfaces;
+using Infrastructure.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -29,10 +30,14 @@ namespace API.Controllers
             return Ok(table);
         }
 
+        [HttpGet("available")]
+        public async Task<IEnumerable<Table>> GetReservationsByTable(int numberOfguests, DateTime date, TimeSpan time)
+        {
+            return await _tableRepo.GetAvailableTables(numberOfguests, date, time);
+        }
 
 
-        
-       
+
     }
 }
 

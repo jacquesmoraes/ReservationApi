@@ -14,36 +14,9 @@ namespace Infrastructure.Repository
             _context = context;
         }
 
-        
-
-        public async Task<IEnumerable<Reservation>> GetAllReservations()
-        {
-           return  await _context.Reservations.Include(x => x.Table).
-                OrderBy(x => x.ReservationDate).ThenBy(x => x.ReservationTime).ToListAsync();
-        }
-        
        
 
-        public async Task<Reservation> GetReservationById(int id)
-        {
-            var reservation = await _context.Reservations.Include(x => x.Table).FirstOrDefaultAsync(r => r.Id == id);
-            return reservation;
-        }
-
-        public async Task<IEnumerable<Reservation>> GetReservationByTableId(int id, DateTime date, TimeSpan? time)
-        {
-               
-            var reservations = await _context.Reservations.Where(x => x.TableId == id &&
-           x.ReservationDate == date).ToListAsync();
-            if (time.HasValue)
-            {
-                return FilterByTime(reservations, time.Value);
-            }
-            else
-            {
-                return reservations.ToList();
-            }
-        }
+       
 
         public async Task<bool> IsTableAvailable(int id, string name, DateTime date, TimeSpan time)
         {
