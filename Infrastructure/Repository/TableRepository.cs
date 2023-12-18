@@ -28,10 +28,15 @@ namespace Infrastructure.Repository
         public async Task<IEnumerable<Table>> GetAvailableTables(int numberOfGuests, DateTime date, TimeSpan time)
         {
 
-            var reservations = await _context.Reservations.Where(x => x.Table.Capacity >= numberOfGuests &&
-           x.ReservationDate == date &&
-           x.ReservationTime <= time && (x.ReservationTime + TimeSpan.FromHours(5)) > time ||
-            time.Subtract(TimeSpan.FromHours(5)) <= x.ReservationTime && x.ReservationTime < time.Add(TimeSpan.FromHours(5))).ToListAsync();
+            var reservations = await _context.Reservations.Where(x => 
+                (x.ReservationDate == date) &&(
+                (x.ReservationTime <= time && time < (x.ReservationTime + TimeSpan.FromHours(5))  ) ||
+               ( time >= (x.ReservationTime - TimeSpan.FromHours(5)) && time < x.ReservationTime)
+                )) .ToListAsync();
+                
+       
+            
+            
             if (!reservations.Any())
             {
                 return await _context.Tables.ToListAsync();

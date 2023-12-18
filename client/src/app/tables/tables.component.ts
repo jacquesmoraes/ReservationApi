@@ -9,6 +9,9 @@ import { TablesService } from './tables.service';
 })
 export class TablesComponent implements OnInit {
   tables : Table[] = [];
+  numberOfGuests: number = 0;
+  date: Date = new Date();
+  time: Date = new Date();
 
  constructor(private tableService : TablesService){}
 
@@ -18,6 +21,18 @@ export class TablesComponent implements OnInit {
       error: error => console.log(error)
 
     })
+  }
+  onUserInputChange(): void {
+   
+    this.getAvailableTables();
+  }
+
+  getAvailableTables(): void {
+    this.tableService.getAvailableTables(this.numberOfGuests, this.date, this.time)
+      .subscribe((tables) => {
+        this.tables = tables;
+        
+      });
   }
 
 }
