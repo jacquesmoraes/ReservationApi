@@ -17,7 +17,7 @@ export class ReservationComponent implements OnInit {
    this.getReservation();
   }
 
-  getReservation(){
+  getReservation(): void{
     this.reservationService.getReservations().subscribe({
       next:(response : Reservation[]) => this.myRes = response,
       error: error =>(console.log(error))

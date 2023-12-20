@@ -2,40 +2,46 @@
   {
     "Id": 1,
     "TableName": "prime-deck",
-    "Capacity": 5
+    "Capacity": 5,
+    "PictureUrl": "https://localhost:5001/images/deck.jpg"
   },
 
   {
     "Id": 2,
     "TableName": "saloon",
-    "Capacity": 7
+    "Capacity": 7,
+    "PictureUrl": "https://localhost:5001/images/saloon.jpg"
 
   },
 
   {
     "Id": 3,
     "TableName": "garden-table",
-    "Capacity": 8
+    "Capacity": 8,
+    "PictureUrl": "https://localhost:5001/images/garden.jpg"
 
   },
   {
     "Id": 4,
     "TableName": "purple-room",
-    "Capacity": 15
+    "Capacity": 15,
+    "PictureUrl": "https://localhost:5001/images/purple.jpg"
 
   },
 
   {
     "Id": 5,
     "TableName": "art-gallery",
-    "Capacity": 10
+    "Capacity": 10,
+    "PictureUrl": "https://localhost:5001/images/art-gallery.jpg"
 
   },
 
   {
     "Id": 6,
     "TableName": "outer-space-room",
-    "Capacity": 20
+    "Capacity": 20,
+    "PictureUrl": "https://localhost:5001/images/outer-space.jpg"
 
   }
 

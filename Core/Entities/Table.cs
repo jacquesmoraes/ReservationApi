@@ -12,6 +12,7 @@ namespace Core.Entities
         public string TableName { get; set; }
 
         public int Capacity { get; set; }
+        public string PictureUrl { get; set; }
 
     }
 }

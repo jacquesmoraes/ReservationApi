@@ -16,12 +16,15 @@ export class TablesService {
 
   }
   getAvailableTables(numberOfGuests: number, date: Date, time: Date): Observable<Table[]> {
+    
+    const formatedDate = date.toISOString().split('T')[0];
     const params = {
       numberOfGuests,
-      date,
+      date : formatedDate,
       time,
     };
-    return this.http.post<Table[]>(this.baseUrl + 'tables/available', params);
-   
-  }
+    return this.http.post<Table[]>(this.baseUrl + 'table/available', params);
+   
+  }
+
 }

@@ -34,9 +34,6 @@ namespace Infrastructure.Repository
                ( time >= (x.ReservationTime - TimeSpan.FromHours(5)) && time < x.ReservationTime)
                 )) .ToListAsync();
                 
-       
-            
-            
             if (!reservations.Any())
             {
                 return await _context.Tables.ToListAsync();
@@ -47,8 +44,6 @@ namespace Infrastructure.Repository
                 .ToListAsync();
 
             return availableTables;
-
-
 
         }
 

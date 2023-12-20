@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Table } from '../models/tables';
 import { TablesService } from './tables.service';
 
+
 @Component({
   selector: 'app-tables',
   templateUrl: './tables.component.html',
@@ -16,15 +17,19 @@ export class TablesComponent implements OnInit {
  constructor(private tableService : TablesService){}
 
   ngOnInit(): void {
+   
+    this.getTables();
+  }
+  onUserInputChange(): void {
+   
+    this.getAvailableTables();
+  }
+  getTables(){
     this.tableService.getTables().subscribe({
       next: (response : Table[]) => this.tables = response,
       error: error => console.log(error)
 
     })
-  }
-  onUserInputChange(): void {
-   
-    this.getAvailableTables();
   }
 
   getAvailableTables(): void {
@@ -32,7 +37,11 @@ export class TablesComponent implements OnInit {
       .subscribe((tables) => {
         this.tables = tables;
         
-      });
-  }
+      });
+  }
+  
+
+
+  
 
 }
