@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Specification
 {
-    public class ReservationParams
+    public class CheckTableParams
     {
         public int ReservationId { get; set; }
         public int NumberOfGuests { get; set; }

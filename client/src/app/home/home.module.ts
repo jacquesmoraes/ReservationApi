@@ -10,7 +10,7 @@ import { CarouselComponent, CarouselModule } from 'ngx-bootstrap/carousel';
     CommonModule
   ],
   exports:[
-    CarouselModule
+    CarouselModule,
   ]
 })
 export class HomeModule { }

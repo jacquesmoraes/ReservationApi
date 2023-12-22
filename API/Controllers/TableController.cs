@@ -30,7 +30,7 @@ namespace API.Controllers
             return Ok(table);
         }
 
-      [HttpPost("available")]
+        [HttpGet("available")]
         public async Task<IEnumerable<Table>> GetReservationsByTable([FromQuery]int numberOfguests,[FromQuery] DateTime date, [FromQuery] TimeSpan time)
         {
             return await _tableRepo.GetAvailableTables(numberOfguests, date, time);

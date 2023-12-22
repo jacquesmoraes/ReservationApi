@@ -1,0 +1,14 @@
+<div *ngIf="table" class="card h-100 mb-4 box-shadow">
+
+  <div class="image position-relative" style="cursor: pointer;">
+    <img class="img-fluid bg-light" style="height: 300px;" routerLink="/shop/{{table.id}}" src="{{table.pictureUrl}}"
+      alt="{{table.tableName}}">
+  </div>
+
+
+  <div class="card-body d-flex flex-column">
+    <h5 class="card-title">Table {{ table.tableName }}</h5>
+    <p class="card-text">Capacity: {{ table.capacity }} guests</p>
+  </div>
+  <button mat-button color="primary">book this table</button>
+  </div>

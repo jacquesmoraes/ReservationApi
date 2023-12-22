@@ -9,11 +9,11 @@ namespace Core.Specification
 {
     public class ReservationForCountSpecification : BaseSpecification<Reservation>
     {
-        public ReservationForCountSpecification(ReservationParams reservationParams) : base(x =>
-            x.Id == reservationParams.ReservationId ||
-                 x.ReservationDate == reservationParams.ReservationDate ||
-                 x.ReservationTime == reservationParams.ReservationTime ||
-                 x.NumberOfPeople == reservationParams.NumberOfGuests
+        public ReservationForCountSpecification(CheckTableParams tableParams) : base(x =>
+            x.Id ==  tableParams.ReservationId ||
+                 x.ReservationDate == tableParams.ReservationDate ||
+                 x.ReservationTime == tableParams.ReservationTime ||
+                 x.NumberOfPeople == tableParams.NumberOfGuests
             
         )
         {

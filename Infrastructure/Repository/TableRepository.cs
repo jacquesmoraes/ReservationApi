@@ -36,7 +36,7 @@ namespace Infrastructure.Repository
                 
             if (!reservations.Any())
             {
-                return await _context.Tables.ToListAsync();
+                return await _context.Tables.Where(x => x.Capacity >=numberOfGuests).ToListAsync();
             }
             var reservedTableIds = reservations.Select(r => r.TableId);
             var availableTables = await _context.Tables

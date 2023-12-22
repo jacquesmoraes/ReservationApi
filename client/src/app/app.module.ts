@@ -5,24 +5,29 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
 import { ReservationComponent } from './reservation/reservation.component';
-import { TablesComponent } from './tables/tables.component';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
-import { MatDatepickerModule } from '@angular/material/datepicker'
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { HomeComponent } from './home/home.component';
 import { HomeModule } from './home/home.module';
+import { NavbarComponent } from './navbar/navbar.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { TablesComponent } from './tables/tables.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { TableItemComponent } from './table-item/table-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReservationComponent,
     TablesComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent,
+    TableItemComponent
   ],
   imports: [
     BrowserModule,
@@ -41,8 +46,6 @@ import { HomeModule } from './home/home.module';
     MatButtonModule,
     NgxMaterialTimepickerModule,
     HomeModule
-
-
   ],
   providers: [],
   bootstrap: [AppComponent]
