@@ -1,6 +1,6 @@
-export class CheckTableParams{
+export interface CheckTableParams{
     
-    numberOfGuests = 0;
-    date = Date();
-    time = Date();
+    numberOfGuests? :number  ;
+    date? : Date
+    time? : Date
 }

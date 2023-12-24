@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { TablesComponent } from './tables/tables.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { TableItemComponent } from './table-item/table-item.component';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { TableItemComponent } from './table-item/table-item.component';
     MatIconModule,
     MatButtonModule,
     NgxMaterialTimepickerModule,
-    HomeModule
+    HomeModule,
+    TimepickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -24,23 +24,13 @@ return this.http.get<Table>(this.baseUrl + 'table/'+ id)
 }
 
 
-  getAvailableTables(checkParams: CheckTableParams) {
-    
-
+  getAvailableTables( {date, time, numberOfGuests = 10}: CheckTableParams) {
+    // const {date, time, numberOfGuests = 10} = checkParams
     let params = new HttpParams();
-    if (checkParams.date) {
-      
-      const formattedDate = new Date(checkParams.date).toISOString().split('T')[0];
-      params = params.append('date', formattedDate);
-  }
-
-  if (checkParams.time) {
-    const [hours, minutes, seconds] = checkParams.time.split(':');
-
-    const formattedTime = new Date(1970, 0, 1, +hours, +minutes, +seconds).toISOString().split('T')[1];
-    console.log('Formatted Time:', formattedTime);
-    params = params.append('time', formattedTime);
-  }
+    if(numberOfGuests) params = params.append('NumberOfGuests', numberOfGuests);
+    if(date)  params = params.append('ReservationTime', date.toISOString());
+     if(time) params = params.append('ReservationTime', time.toISOString());
+    
 
     return  this.http.get<Table[]>(this.baseUrl + 'table/available',{ params} );
    

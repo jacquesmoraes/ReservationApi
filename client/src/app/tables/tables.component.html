@@ -8,7 +8,7 @@
           <div class="navbar-nav align-items-center mx-auto">
             <mat-form-field>
               <mat-label>number of guests</mat-label>
-              <input [value]="checkParams.numberOfGuests" matNativeControl required matInput placeholder="Ex. 10">
+              <input matInput type="number" [ngModel]="checkParams.numberOfGuests"  matNativeControl required >
             </mat-form-field>
 
 
@@ -21,19 +21,20 @@
               <mat-datepicker #datePicker disabled="false"></mat-datepicker>
             </mat-form-field>
 
-            <mat-form-field class="me-5">
-              <mat-label>what time</mat-label>
-              <select [ngModel]="checkParams.time" matNativeControl required>
-                <option value="13:30:00">13:30</option>
-                <option value="14:30:00">14:30</option>
-                <option value="15:30:00">15:30</option>
-                <option value="16:30:00">16:30</option>
-              </select>
-            </mat-form-field>
+            <timepicker 
+            class="me-3"
+            [showMinutes]="true"
+            [showSpinners]="false"
+            [ngModel]="checkParams.time" 
+            [(ngModel)]="time">
+           
+            </timepicker>
+           
 
-            <button mat-raised-button (click)="getAvailableTables()" color="primary">Check available tables</button>
+          
 
           </div>
+          <button class="ms-3" mat-raised-button (click)="onReservationRequest()" color="primary">Check available tables</button>
         </div>
 
       </div>
@@ -41,8 +42,21 @@
     
   </div>
 </nav>
-<h2 class=" text-center mt-4 mb-4">Available Tables</h2>
-<div class="row row-cols-3 g-3 pb-5">
+<div *ngIf="checkParams?.numberOfGuests" class="my-5">
+  <div class=" text-center bg-body-tertiary rounded-3">
+    <div class="container p-2">
+      <h2 class=" mt-4 mb-4">Available Tables for {{checkParams.numberOfGuests}} guests</h2>
+     
+     <span> in the date</span> <p class="col-lg-8 mx-auto lead">
+         <strong>{{checkParams.date}}</strong> 
+      </p>
+      <span> at:</span>
+      <p  class="col-lg-8 mx-auto lead"><strong> {{checkParams.time}}</strong></p>
+    </div>
+  </div>
+</div>
+
+<div class="row row-cols-3 g-3 pb-5 my-5">
  
   <div class="col" *ngFor="let table of tables" >
     

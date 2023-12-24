@@ -40,13 +40,15 @@ namespace Infrastructure.Repository
             }
             var reservedTableIds = reservations.Select(r => r.TableId);
             var availableTables = await _context.Tables
-                .Where(t => !reservedTableIds.Contains(t.Id) && t.Capacity >= numberOfGuests)
+                .Where(t => IsTableAvailable(t.Id, reservedTableIds) && t.Capacity >= numberOfGuests)
                 .ToListAsync();
 
             return availableTables;
 
         }
-
+        private bool IsTableAvailable(int tableId, IEnumerable<int> reservedTableIds){
+            return !reservedTableIds.Contains(tableId);
+        }
         
     }
 }
