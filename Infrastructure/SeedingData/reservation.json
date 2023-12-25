@@ -13,7 +13,7 @@
     "NumberOfPeople": 3,
     "ReservationDate": "2024-04-01",
     "ReservationTime": "10:45:00",
-    "TableId": 2
+    "TableId": 6
 
   },
   {
@@ -49,7 +49,7 @@
     "NumberOfPeople": 2,
     "ReservationDate": "2024-05-10",
     "ReservationTime": "10:45:00",
-    "TableId": 1
+    "TableId": 3
 
   },
 
@@ -58,7 +58,7 @@
     "NumberOfPeople": 2,
     "ReservationDate": "2024-05-21",
     "ReservationTime": "11:45:00",
-    "TableId": 1
+    "TableId": 4
 
   }
 

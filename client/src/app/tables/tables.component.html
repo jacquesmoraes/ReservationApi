@@ -15,8 +15,10 @@
             <mat-icon class="ms-2 me-5">people</mat-icon>
             <mat-form-field class="me-5">
               <mat-label>choose a date</mat-label>
-              <input [ngModel]="checkParams.date" matInput matNativeControl required [matDatepicker]="datePicker"
-                [min]="date" disabled>
+              <input [ngModel]="checkParams.date" 
+                     matInput matNativeControl required 
+                     [matDatepicker]="datePicker"
+                     [min]="date" disabled>
               <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
               <mat-datepicker #datePicker disabled="false"></mat-datepicker>
             </mat-form-field>

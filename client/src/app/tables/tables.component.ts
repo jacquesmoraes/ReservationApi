@@ -37,7 +37,7 @@ export class TablesComponent implements OnInit {
 
   onReservationRequest() {
     // this.checkParams é interpretado como bool por causa do operador && e caso seja falsy o segundo membro nem é executado
-    
+    console.log(this.checkParams)
     this.checkParams && this.tableService.getAvailableTables(this.checkParams).subscribe({
       next: response => {
         console.log(response);
@@ -46,9 +46,5 @@ export class TablesComponent implements OnInit {
       error: error => console.log(error)
     })
   }
-
-  
-
-
 
 }

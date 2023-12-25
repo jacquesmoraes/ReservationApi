@@ -9,8 +9,10 @@ namespace Core.Entities
         public string GuestName { get; set; }
 
         [Required]
+
         [DataType(DataType.Date)]
         public DateTime ReservationDate { get; set; }
+
         [Required]
         [DataType(DataType.Time)]
        public TimeSpan ReservationTime { get; set; }

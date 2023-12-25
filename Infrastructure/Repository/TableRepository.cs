@@ -25,30 +25,30 @@ namespace Infrastructure.Repository
             return await _context.Tables.FirstOrDefaultAsync(t => t.Id == id);
         }
 
-        public async Task<IEnumerable<Table>> GetAvailableTables(int numberOfGuests, DateTime date, TimeSpan time)
+         public async Task<IEnumerable<Table>> GetAvailableTables(int numberOfGuests, DateTime date, TimeSpan time)
         {
 
             var reservations = await _context.Reservations.Where(x => 
-                (x.ReservationDate == date) &&(
-                (x.ReservationTime <= time && time < (x.ReservationTime + TimeSpan.FromHours(5))  ) ||
-               ( time >= (x.ReservationTime - TimeSpan.FromHours(5)) && time < x.ReservationTime)
-                )) .ToListAsync();
-                
+          x.ReservationDate == date &&(
+          ((x.ReservationTime <= time) && (x.ReservationTime + TimeSpan.FromHours(5)) > time) ||
+           ((time.Subtract(TimeSpan.FromHours(5)) <= x.ReservationTime) && (x.ReservationTime < time.Add(TimeSpan.FromHours(5)))))
+           ).ToListAsync();
+
             if (!reservations.Any())
             {
                 return await _context.Tables.Where(x => x.Capacity >=numberOfGuests).ToListAsync();
             }
             var reservedTableIds = reservations.Select(r => r.TableId);
             var availableTables = await _context.Tables
-                .Where(t => IsTableAvailable(t.Id, reservedTableIds) && t.Capacity >= numberOfGuests)
+                .Where(t => !reservedTableIds.Contains(t.Id) && t.Capacity >= numberOfGuests)
                 .ToListAsync();
 
             return availableTables;
 
         }
-        private bool IsTableAvailable(int tableId, IEnumerable<int> reservedTableIds){
-            return !reservedTableIds.Contains(tableId);
-        }
+        //private bool IsTableAvailable(int tableId, IEnumerable<int> reservedTableIds){
+        //    return !reservedTableIds.Contains(tableId);
+        //}
         
     }
 }

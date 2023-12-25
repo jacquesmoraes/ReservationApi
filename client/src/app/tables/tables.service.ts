@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Table } from '../models/tables';
-import { Observable } from 'rxjs';
 import { CheckTableParams } from '../models/CheckTableParams';
 
 @Injectable({
@@ -24,11 +23,11 @@ return this.http.get<Table>(this.baseUrl + 'table/'+ id)
 }
 
 
-  getAvailableTables( {date, time, numberOfGuests = 10}: CheckTableParams) {
+  getAvailableTables( {date, time, numberOfGuests = 10 }: CheckTableParams) {
     // const {date, time, numberOfGuests = 10} = checkParams
     let params = new HttpParams();
     if(numberOfGuests) params = params.append('NumberOfGuests', numberOfGuests);
-    if(date)  params = params.append('ReservationTime', date.toISOString());
+    if(date)  params = params.append('ReservationDate', date.toISOString());
      if(time) params = params.append('ReservationTime', time.toISOString());
     
 
