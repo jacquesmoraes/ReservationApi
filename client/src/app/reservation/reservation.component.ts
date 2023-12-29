@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Reservation } from '../models/reservation';
 import { ReservationService } from './reservation.service';
 
@@ -9,7 +9,9 @@ import { ReservationService } from './reservation.service';
 })
 export class ReservationComponent implements OnInit {
  minDate = new Date();
- myRes : Reservation[] = []
+ myRes : Reservation[] = [];
+ guestName : string = '';
+ reservation? : Reservation;
 
  constructor(private reservationService: ReservationService){}
   

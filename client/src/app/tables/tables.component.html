@@ -5,38 +5,38 @@
 
       <div class="col-12 d-flex justify-content-center">
         <div class="collapse navbar-collapse">
-          <div class="navbar-nav align-items-center mx-auto">
+          <form  [formGroup]="filterForm" 
+                (ngSubmit)="onSubmit()" class="navbar-nav align-items-center mx-auto">
+            <!--  -->
             <mat-form-field>
               <mat-label>number of guests</mat-label>
-              <input matInput type="number" [ngModel]="checkParams.numberOfGuests"  matNativeControl required >
+              <input matInput type="number"
+              
+              formControlName="numberOfGuests" matNativeControl >
             </mat-form-field>
-
-
             <mat-icon class="ms-2 me-5">people</mat-icon>
-            <mat-form-field class="me-5">
+            
+            <mat-form-field  class="me-5">
               <mat-label>choose a date</mat-label>
-              <input [ngModel]="checkParams.date" 
-                     matInput matNativeControl required 
+              <input formControlName="date"
+               
+                     matInput  
                      [matDatepicker]="datePicker"
-                     [min]="date" disabled>
+                     [min]="date" >
               <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
-              <mat-datepicker #datePicker disabled="false"></mat-datepicker>
+              <mat-datepicker #datePicker ></mat-datepicker>
             </mat-form-field>
 
-            <timepicker 
-            class="me-3"
-            [showMinutes]="true"
-            [showSpinners]="false"
-            [ngModel]="checkParams.time" 
-            [(ngModel)]="time">
-           
-            </timepicker>
+            <mat-form-field>
+              <mat-label>Choose a time</mat-label>
+              <input matInput type="time" formControlName="time">
+            </mat-form-field>
            
 
           
 
-          </div>
-          <button class="ms-3" mat-raised-button (click)="onReservationRequest()" color="primary">Check available tables</button>
+            <button type="submit" class="ms-3" mat-raised-button  color="primary">Check available tables</button>
+          </form>
         </div>
 
       </div>
@@ -44,20 +44,23 @@
     
   </div>
 </nav>
-<div *ngIf="checkParams?.numberOfGuests" class="my-5">
+
+<div *ngIf="filterForm.value.numberOfGuests > 0" class="my-5">
   <div class=" text-center bg-body-tertiary rounded-3">
     <div class="container p-2">
-      <h2 class=" mt-4 mb-4">Available Tables for {{checkParams.numberOfGuests}} guests</h2>
+     
+           
+      <h2 class=" mt-4 mb-4">Available Tables for {{ filterForm.value.numberOfGuests}} guests</h2>
      
      <span> in the date</span> <p class="col-lg-8 mx-auto lead">
-         <strong>{{checkParams.date}}</strong> 
+         <strong>{{formattedReservationDateTime | date }}</strong> 
       </p>
       <span> at:</span>
-      <p  class="col-lg-8 mx-auto lead"><strong> {{checkParams.time}}</strong></p>
+      <p  class="col-lg-8 mx-auto lead"><strong> {{formattedReservationDateTime | date : 'shortTime'}}</strong></p>
     </div>
   </div>
+  
 </div>
-
 <div class="row row-cols-3 g-3 pb-5 my-5">
  
   <div class="col" *ngFor="let table of tables" >
@@ -65,6 +68,7 @@
     <app-table-item [table]="table"></app-table-item>
     </div>
 </div>
+
 
 
 <!-- Navbar -->

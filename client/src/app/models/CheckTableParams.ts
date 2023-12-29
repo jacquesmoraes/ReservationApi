@@ -1,6 +1,6 @@
 export interface CheckTableParams{
     
     numberOfGuests? :number  ;
-    date? : Date
-    time? : Date
+    date? : Date;
+    time? : Date;
 }
