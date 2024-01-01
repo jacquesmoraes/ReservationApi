@@ -24,5 +24,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule,
     MatDatepickerModule
   ],
+    
 })
 export class TablesModule { }

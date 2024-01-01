@@ -10,5 +10,5 @@
     <h5 class="card-title">Table {{ table.tableName }}</h5>
     <p class="card-text">Capacity: {{ table.capacity }} guests</p>
   </div>
-  <button routerLink="/reservation" mat-button color="primary">book this table</button>
+  <button *ngIf="isSubmitted"  routerLink="/reservation" mat-button color="primary">book this table</button>
   </div>

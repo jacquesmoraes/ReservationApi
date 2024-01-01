@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class TablesComponent implements OnInit {
   tables: Table[] = [];
   numberOfGuests?: number;
-  checkParams: CheckTableParams
+  checkParams: CheckTableParams;
   date: Date = new Date();
   time: Date = new Date();
   filterForm: FormGroup;
@@ -23,7 +23,7 @@ export class TablesComponent implements OnInit {
   constructor(private tableService: TablesService, private formBuilder: FormBuilder) {
     this.checkParams = {}
     this.filterForm = this.formBuilder.group({
-      numberOfGuests: [null, [Validators.required, Validators.min(0), Validators.max(20)]],
+      numberOfGuests: [null, [Validators.required, Validators.min(1), Validators.max(20)]],
       date: [null, Validators.required],
       time: [null, Validators.required]
     });
@@ -33,13 +33,16 @@ export class TablesComponent implements OnInit {
     this.getTables();
   }
   onSubmit() {
-    this.isSubmitted = true;
     
-    if (this.filterForm.invalid) {
-      console.log('invalid')
-      return;
+    
+    if (this.filterForm.valid) {
+      this.isSubmitted = true;
+      this.onReservationRequest();
     }
-    this.onReservationRequest();
+    else{
+      this.filterForm.markAllAsTouched();
+    }
+    
   }
   getTables() {
     this.tableService.getTables().subscribe({

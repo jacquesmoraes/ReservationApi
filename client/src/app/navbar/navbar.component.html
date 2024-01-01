@@ -1,16 +1,26 @@
-<nav  class="navbar navbar-expand-lg mb-4" style="background-color: #ffede7; ">
+<nav class="navbar navbar-expand-lg mb-4" style="background-color: #ffede7; ">
   <div class="container">
-    <a routerLink="/" >
-      <img   src="../../assets/img/logo.jpg" alt="Burger house Logo" height="100"/>
+    <a routerLink="/">
+      <img src="../../assets/img/logo.jpg" alt="Burger house Logo" height="100" />
     </a>
-    <div class="d-flex justify-content-center collapse navbar-collapse " >
-    
-        <a routerLink="/" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" class="nav-link px-3">Home</a>
-        <a routerLink="/about" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" class="nav-link px-3" >about us</a>
-        <a routerLink="/blog" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" class="nav-link px-3" >blog</a>
-        <a routerLink="/table" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" class="nav-link px-3" >book a table</a>
-        <a routerLink="/contact" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" class="nav-link px-3" >contact us</a>
-      </div>
+    <div class="d-flex justify-content-center  navbar-collapse ">
+
+      <a routerLink="/" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active"
+        class="nav-link px-3">Home</a>
+      <a routerLink="/about" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active"
+        class="nav-link px-3">about us</a>
+      <a routerLink="/blog" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active"
+        class="nav-link px-3">blog</a>
+      <a routerLink="/table" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active"
+        class="nav-link px-3">book a table</a>
+      <a routerLink="/contact" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active"
+        class="nav-link px-3">contact us</a>
+
     </div>
-  
+    <div  class="d-flex ">
+      <a href="" class="btn btn-outline-secondary ms-auto">login</a>
+      <a href="" class="btn btn-outline-secondary ms-2">sign in</a>
+    </div>
+  </div>
+
 </nav>
