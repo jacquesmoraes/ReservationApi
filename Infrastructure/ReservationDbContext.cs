@@ -12,7 +12,7 @@ namespace Infrastructure
 {
     public class ReservationDbContext : DbContext
     {
-        public ReservationDbContext(DbContextOptions options) : base(options)
+        public ReservationDbContext(DbContextOptions<ReservationDbContext> options) : base(options)
         {
         }
 

@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg  navbar-scroll shadow-0" style="background-color: #ffede7;">
-  <!-- *ngIf="!isSubmitted" -->
+<nav *ngIf="!isSubmitted" class="navbar navbar-expand-lg  navbar-scroll shadow-0" style="background-color: #ffede7;">
+  <!--  -->
   <div class="container d-flex justify-content-center">
     <div class="row">
 
@@ -30,7 +30,7 @@
               <mat-label>Choose a time</mat-label>
               <input matInput type="time" formControlName="time">
               <mat-error *ngIf="filterForm.get('time')?.touched && filterForm.get('time')?.invalid">
-                the time is required
+                the time is required and must be between 8AM and 9PM
              </mat-error>
             </mat-form-field>
 
@@ -47,7 +47,7 @@
   </div>
 </nav>
 
-<div *ngIf="isSubmitted && filterForm.value.numberOfGuests && filterForm.value.date && filterForm.value.time"
+<div *ngIf="isSubmitted"
   class="my-5">
   <div class=" text-center bg-body-tertiary rounded-3">
     <div class="container p-2">

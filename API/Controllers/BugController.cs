@@ -1,5 +1,6 @@
 ﻿using API.Errors;
 using Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -13,7 +14,15 @@ namespace API.Controllers
             _reservationDbContext = reservationDbContext;
         }
 
-        [HttpGet("NotFound/{id}")]
+        [HttpGet("testauth")]
+        [Authorize]
+        public ActionResult<string> GetSecretText()
+        {
+            return "Secret stuff";
+        }
+
+
+        [HttpGet("notfound")]
         public  ActionResult GetNotFound(int id)
         {
             var obj = _reservationDbContext.Tables.Find(id);
