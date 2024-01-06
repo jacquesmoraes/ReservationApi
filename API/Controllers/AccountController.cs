@@ -7,7 +7,6 @@ using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace API.Controllers
 {
@@ -30,7 +29,7 @@ namespace API.Controllers
         [Authorize]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-           
+
             var user = await _userManager.FindByEmailFromClaimsPrincipleByAdress(User);
             return new UserDto
             {
@@ -61,7 +60,7 @@ namespace API.Controllers
         public async Task<ActionResult<AddressDto>> UpdateUserAdress(AddressDto address)
         {
             var user = await _userManager.FindUserByClaimsPrincipleByAdress(HttpContext.User);
-            
+
             user.Address = _mapper.Map<AddressDto, Address>(address);
             var result = await _userManager.UpdateAsync(user);
 

@@ -15,7 +15,6 @@ export class TablesComponent implements OnInit {
   numberOfGuests?: number;
   checkParams: CheckTableParams;
   date: Date = new Date();
-  time: Date = new Date();
   filterForm: FormGroup;
   isSubmitted = false;
 
@@ -35,6 +34,7 @@ export class TablesComponent implements OnInit {
 
 
   onSubmit() {
+    console.log(this.filterForm);
     if (this.filterForm.valid) {
       this.isSubmitted = true;
       this.onReservationRequest();

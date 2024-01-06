@@ -1,78 +1,86 @@
-<nav *ngIf="!isSubmitted" class="navbar navbar-expand-lg  navbar-scroll shadow-0" style="background-color: #ffede7;">
-  <!--  -->
+<div style="background-color: #ffede7; ">
+  <!-- *ngIf="!isSubmitted" -->
   <div class="container d-flex justify-content-center">
-    <div class="row">
+    <div class="row pt-3" style="border-top: 1px solid grey;">
+      <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+        <!--  -->
+        <mat-form-field>
+          <mat-label>number of guests</mat-label>
+          <input matInput type="number" formControlName="numberOfGuests" matNativeControl>
+          <mat-error *ngIf="filterForm.get('numberOfGuests')?.touched && filterForm.get('numberOfGuests')?.invalid">
+            Number of guests is required and must be between 1 and 20.
+          </mat-error>
+        </mat-form-field>
+        <mat-icon class="ms-2 me-5">people</mat-icon>
 
-      <div class="col-12 d-flex justify-content-center">
-        <div class="collapse navbar-collapse">
-          <form [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="navbar-nav align-items-center mx-auto">
-            <!--  -->
-            <mat-form-field>
-              <mat-label>number of guests</mat-label>
-              <input matInput type="number" formControlName="numberOfGuests" matNativeControl>
-              <mat-error *ngIf="filterForm.get('numberOfGuests')?.touched && filterForm.get('numberOfGuests')?.invalid">
-                Number of guests is required and must be between 1 and 20.
-            </mat-error>
-            </mat-form-field>
-            <mat-icon class="ms-2 me-5">people</mat-icon>
+        <mat-form-field class="me-5">
+          <mat-label>choose a date</mat-label>
+          <input formControlName="date" readonly matInput [matDatepicker]="datePicker" [min]="date">
+          <mat-error *ngIf="filterForm.get('date')?.touched && filterForm.get('date')?.invalid">
+            the date is required
+          </mat-error>
+          <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
+          <mat-datepicker #datePicker></mat-datepicker>
+        </mat-form-field>
 
-            <mat-form-field class="me-5">
-              <mat-label>choose a date</mat-label>
-              <input formControlName="date" matInput [matDatepicker]="datePicker" [min]="date">
-              <mat-error *ngIf="filterForm.get('date')?.touched && filterForm.get('date')?.invalid">
-               the date is required
-            </mat-error>
-              <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
-              <mat-datepicker #datePicker></mat-datepicker>
-            </mat-form-field>
-
-            <mat-form-field>
-              <mat-label>Choose a time</mat-label>
-              <input matInput type="time" formControlName="time">
-              <mat-error *ngIf="filterForm.get('time')?.touched && filterForm.get('time')?.invalid">
-                the time is required and must be between 8AM and 9PM
-             </mat-error>
-            </mat-form-field>
+        <mat-form-field>
+          <mat-label>Choose a time</mat-label>
+          <input matInput type="time" formControlName="time">
+          <mat-error *ngIf="filterForm.get('time')?.touched && filterForm.get('time')?.invalid">
+            the time is required and must be between 8AM and 9PM
+          </mat-error>
+        </mat-form-field>
 
 
 
 
-            <button type="submit" class="ms-3" mat-raised-button color="primary">Check available tables</button>
-          </form>
+        <button type="submit" class="ms-3" mat-raised-button color="primary">Check available tables</button>
+      </form>
+    </div>
+
+
+
+  </div>
+</div>
+<!-- d-flex flex-column align-items-center -->
+<div  class="container mt-4">
+  <div class=" row">
+    
+    <section class="col-9">
+
+      <div class="row row-cols-3 g-3 mb-4">
+
+        <div *ngFor="let table of tables">
+
+          <app-table-item [isSubmitted]="isSubmitted" [table]="table"></app-table-item>
         </div>
-
       </div>
-    </div>
+    </section>
+    <section class="col-3"  >
 
-  </div>
-</nav>
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm ">
+          <div class="card-header py-3 text-white bg-custom">
+            <h4 class="my-0 fw-normal">reservation summary</h4>
+          </div>
+          <div class="card-body">
+           
+            <ul  class="list-unstyled mt-3 mb-4">
+              <li><i>guests:&nbsp; </i> <em>  <span style="font-weight: 500;" *ngIf="isSubmitted"> {{ filterForm.value.numberOfGuests}}</span> </em></li>
+              <br>
+              <li><i>in the date:&nbsp; </i><em> <span style="font-weight: 500;" *ngIf="isSubmitted">{{formattedReservationDateTime | date }}</span></em></li>
+              <br>
+              <li><i>at: &nbsp;</i> <em><span style="font-weight: 500;" *ngIf="isSubmitted">{{formattedReservationDateTime | date : 'shortTime'}}</span> </em></li>
+            </ul>
+            
+          </div>
+        </div>
+      </div>
+  
+    </section>
 
-<div *ngIf="isSubmitted"
-  class="my-5">
-  <div class=" text-center bg-body-tertiary rounded-3">
-    <div class="container p-2">
 
-
-      <h2 class=" mt-4 mb-4">Available Tables for {{ filterForm.value.numberOfGuests}} guests</h2>
-
-      <span> in the date</span>
-      <p class="col-lg-8 mx-auto lead">
-        <strong>{{formattedReservationDateTime | date }}</strong>
-      </p>
-      <span> at:</span>
-      <p class="col-lg-8 mx-auto lead"><strong> {{formattedReservationDateTime | date : 'shortTime'}}</strong></p>
-    </div>
-  </div>
-
-</div>
-<div class="row row-cols-3 g-3 pb-5 my-5">
-
-  <div class="col" *ngFor="let table of tables">
-
-    <app-table-item [isSubmitted]="isSubmitted" [table]="table"></app-table-item>
   </div>
 </div>
-
-
 
 <!-- Navbar -->

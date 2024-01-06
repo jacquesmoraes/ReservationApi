@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Table } from '../models/tables';
-import { TablesComponent } from '../tables/tables.component';
+import { Table } from '../../models/tables';
 
 @Component({
   selector: 'app-table-item',

@@ -8,7 +8,6 @@ import { ReservationComponent } from './reservation/reservation.component';
 import { HomeComponent } from './home/home.component';
 import { HomeModule } from './home/home.module';
 import { NavbarComponent } from './navbar/navbar.component';
-import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -18,17 +17,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { TablesComponent } from './tables/tables.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
-import { TableItemComponent } from './table-item/table-item.component';
+import { TableItemComponent } from './tables/table-item/table-item.component';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { TablesDetailsComponent } from './tables/tables-details/tables-details.component';
+import { TablesModule } from './tables/tables.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReservationComponent,
-    TablesComponent,
+    
     HomeComponent,
     NavbarComponent,
-    TableItemComponent
+   
   ],
   imports: [
     BrowserModule,
@@ -36,19 +37,11 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatInputModule,
-    MatFormFieldModule,
-    FormsModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatIconModule,
-    MatButtonModule,
-    NgxMaterialTimepickerModule,
     HomeModule,
-    TimepickerModule.forRoot()
+    FormsModule,
+    MatNativeDateModule,
+    NgxMaterialTimepickerModule,
+    TablesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
