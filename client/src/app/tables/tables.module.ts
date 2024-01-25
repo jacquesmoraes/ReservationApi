@@ -11,9 +11,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TableItemComponent } from './table-item/table-item.component';
 import { TablesDetailsComponent } from './tables-details/tables-details.component';
 import { TablesComponent } from './tables.component';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { TablesSidebarComponent } from './tables-sidebar/tables-sidebar.component';
+import { SharedModule } from '../shared/shared.module';
+import { TablesRoutingModule } from './tables-routing.module';
+import { AccountModule } from '../account/account.module';
 
 
 @NgModule({
@@ -22,10 +26,12 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
     TablesComponent,
     TableItemComponent,
     TablesDetailsComponent,
+    TablesSidebarComponent,
   ],
   imports: [
     CommonModule,
     BrowserModule,
+    RouterModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -33,9 +39,13 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatButtonModule,
     MatDatepickerModule,
-    RouterLink,
+    TablesRoutingModule,
     MatIconModule,
     MatButtonModule,
+   AccountModule,
+    SharedModule,
+    
+    
     
   ],
  

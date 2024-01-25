@@ -1,9 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Table } from '../models/tables';
-import { CheckTableParams } from '../models/CheckTableParams';
+import { Table } from '../shared/models/tables';
+import { CheckTableParams } from '../shared/models/CheckTableParams';
 import { formatDate } from '@angular/common';
 import * as moment from 'moment';
+import { environment } from 'src/environments/environmetn';
+import { AccountService } from '../account/account.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ import * as moment from 'moment';
 export class TablesService {
   
 
-  baseUrl = 'https://localhost:5001/api/'
+  baseUrl = environment.apiUrl
 
   constructor(private http: HttpClient) { }
   

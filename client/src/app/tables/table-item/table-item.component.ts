@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Table } from '../../models/tables';
+import { Table } from '../../shared/models/tables';
+import { AccountService } from 'src/app/account/account.service';
 
 @Component({
   selector: 'app-table-item',
@@ -9,4 +10,6 @@ import { Table } from '../../models/tables';
 export class TableItemComponent {
 @Input() table? : Table;
 @Input() isSubmitted? : boolean;
+
+constructor(public accountService: AccountService){}
 }

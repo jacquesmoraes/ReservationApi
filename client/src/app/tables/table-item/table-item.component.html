@@ -1,7 +1,7 @@
 <div *ngIf="table" class="card h-100 mb-4 box-shadow">
 
   <div class="image position-relative" style="cursor: pointer;">
-    <img class="img-fluid bg-light" style="height: 250px;" routerLink="/shop/{{table.id}}" src="{{table.pictureUrl}}"
+    <img class="img-fluid bg-light" style="height: 250px;"  src="{{table.pictureUrl}}"
       alt="{{table.tableName}}">
   </div>
 
@@ -10,5 +10,5 @@
     <h5 class="card-title">Table {{ table.tableName }}</h5>
     <p class="card-text">Capacity: {{ table.capacity }} guests</p>
   </div>
-  <button *ngIf="isSubmitted"  routerLink="/reservation" mat-button color="primary">book this table</button>
+  <button *ngIf="isSubmitted || (accountService.currentUser$ | async) as user"  routerLink="/reservation" mat-button color="primary">book this table</button>
   </div>

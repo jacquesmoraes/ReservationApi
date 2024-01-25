@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg " style="background-color: #ffede7; ">
+  <div class="container">
+    <a routerLink="/">
+      <img src="../../assets/img/logo.jpg" alt="Burger house Logo" height="100" />
+    </a>
+    <div class="d-flex justify-content-center  navbar-collapse ">
+
+      <a routerLink="/" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active"
+        class="nav-link px-3">Home</a>
+      <a routerLink="/about" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active"
+        class="nav-link px-3">about us</a>
+      <a routerLink="/blog" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active"
+        class="nav-link px-3">blog</a>
+      <a routerLink="/table" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active"
+        class="nav-link px-3">book a table</a>
+      <a routerLink="/test-error" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active"
+        class="nav-link px-3">errors</a>
+
+    </div>
+    
+    <ng-container *ngIf="(accountService.currentUser$ | async) === null">
+      <a routerLink="account/login" class="btn btn-outline-secondary me-2">login</a>
+      <a routerLink="account/register" class="btn btn-outline-secondary me-3">sign in</a>
+    </ng-container>
+    <ng-container *ngIf="(accountService.currentUser$ | async) as user">
+      <div class="dropdown ms-3 me-5" style="cursor: pointer;" dropdown>
+        <a dropdownToggle class="dropdown-toggle">
+          welcome {{user.displayName}}
+        </a>
+
+        <ul *dropdownMenu class="dropdown-menu dropdown-menu-right">
+          <li class="py-1"><a routerLink="config" class="dropdown-item"><i class="fa fa-cog me-2"></i>Account config</a> </li>
+          <li class="py-1"><a routerLink="/" class="dropdown-item"><i class="fa fa-ticket me-2"></i>My Reservations</a></li>
+          <div class="dropdown-divider"></div>
+          <li class="py-1"><a (click)="accountService.logout()" class="dropdown-item"><i class="fa fa-sign-out me-2"></i>Logout</a></li>
+        </ul>
+      </div>
+    </ng-container>
+  </div>
+  
+
+</nav>

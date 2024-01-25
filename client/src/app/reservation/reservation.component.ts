@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Reservation } from '../models/reservation';
+import { Reservation } from '../shared/models/reservation';
 import { ReservationService } from './reservation.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { ReservationService } from './reservation.service';
   styleUrls: ['./reservation.component.scss']
 })
 export class ReservationComponent implements OnInit {
- minDate = new Date();
+ 
  myRes : Reservation[] = [];
  guestName : string = '';
  reservation? : Reservation;

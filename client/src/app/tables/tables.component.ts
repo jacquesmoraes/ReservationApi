@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Table } from '../models/tables';
+import { Table } from '../shared/models/tables';
 import { TablesService } from './tables.service';
-import { CheckTableParams } from '../models/CheckTableParams'
+import { CheckTableParams } from '../shared/models/CheckTableParams'
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { formatDateAndTime } from '../utils/date-formatter';
 
 @Component({
   selector: 'app-tables',
@@ -13,14 +14,13 @@ import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } fro
 export class TablesComponent implements OnInit {
   tables: Table[] = [];
   numberOfGuests?: number;
-  checkParams: CheckTableParams;
+  checkTableParams: CheckTableParams;
   date: Date = new Date();
   filterForm: FormGroup;
   isSubmitted = false;
 
-
   constructor(private tableService: TablesService, private formBuilder: FormBuilder) {
-    this.checkParams = {}
+    this.checkTableParams = {}
     this.filterForm = this.formBuilder.group({
       numberOfGuests: [null, [Validators.required, Validators.min(1), Validators.max(20)]],
       date: [null, Validators.required],
@@ -34,14 +34,21 @@ export class TablesComponent implements OnInit {
 
 
   onSubmit() {
-    console.log(this.filterForm);
-    if (this.filterForm.valid) {
-      this.isSubmitted = true;
-      this.onReservationRequest();
-    }
-    else {
+    if(this.filterForm.invalid){
       this.filterForm.markAllAsTouched();
+      return;
     }
+
+    this.isSubmitted = true;
+    // spread(espalhar) = ... servem pra espalhar dados de array ou objeto
+    // const result = [...array1, ...array2]
+    // const user = {emai: "hugo@gmail.com", username:"hgrafa"}
+    // const {email, ...rest} = user // rest operator
+    
+    const formData = this.filterForm.value;
+    this.checkTableParams = {...formData}
+    
+    this.onReservationRequest();
   }
 
   getTables() {
@@ -74,17 +81,14 @@ export class TablesComponent implements OnInit {
     const date = this.filterForm.value.date;
     const time = this.filterForm.value.time;
 
-    if (date && time) {
-      const dateTime = new Date(date);
-      const [hours, minutes] = time.split(':').map(Number);
-      dateTime.setHours(hours, minutes);
-      return dateTime.toISOString();
-    }
-    return '';
+    if (!date || !time)
+      return '';
+    
+    return formatDateAndTime(date, time);
   }
 
-
 }
+
 function timeRangeValidator(minHour: string, maxHour: string) {
   return (control: FormControl): ValidationErrors | null => {
     const value = control.value;

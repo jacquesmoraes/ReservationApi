@@ -59,22 +59,8 @@
     <section class="col-3"  >
 
       <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm ">
-          <div class="card-header py-3 text-white bg-custom">
-            <h4 class="my-0 fw-normal">reservation summary</h4>
-          </div>
-          <div class="card-body">
-           
-            <ul  class="list-unstyled mt-3 mb-4">
-              <li><i>guests:&nbsp; </i> <em>  <span style="font-weight: 500;" *ngIf="isSubmitted"> {{ filterForm.value.numberOfGuests}}</span> </em></li>
-              <br>
-              <li><i>in the date:&nbsp; </i><em> <span style="font-weight: 500;" *ngIf="isSubmitted">{{formattedReservationDateTime | date }}</span></em></li>
-              <br>
-              <li><i>at: &nbsp;</i> <em><span style="font-weight: 500;" *ngIf="isSubmitted">{{formattedReservationDateTime | date : 'shortTime'}}</span> </em></li>
-            </ul>
-            
-          </div>
-        </div>
+        <app-tables-sidebar [isSubmitted]="isSubmitted" [checkTableParams]="checkTableParams" >
+        </app-tables-sidebar>
       </div>
   
     </section>

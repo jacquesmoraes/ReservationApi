@@ -50,7 +50,7 @@ namespace API.Controllers
         [HttpGet("address")]
         public async Task<ActionResult<AddressDto>> GetUserAddress()
         {
-            var user = await _userManager.FindUserByClaimsPrincipleByAdress(User);
+            var user = await _userManager.FindUserByClaimsPrincipleByAdress(HttpContext.User);
             return _mapper.Map<Address, AddressDto>(user.Address);
 
         }
